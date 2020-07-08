@@ -16,11 +16,18 @@ object SparkSample1 {
     hadoopConf.set("fs.s3n.awsAccessKeyId",myAccessKey)
     hadoopConf.set("fs.s3n.awsSecretAccessKey",mySecretKey)
 
+
+//    my_df = spark.read.csv("s3n://bucket-name/file_name.csv").count()
     val s3data = sc.textFile("s3n://" + bucket + "/" + filepath)
     val april = s3data.filter( line => line.contains("april")).count()
     val ano2020 = s3data.filter( line => line.contains("2020")).count()
     val total = s3data.count()
+    println("************")
+    println("************")
+    println("RETRIEVING CSV FILE FROM S3!")
     println("total lines: %s".format(total))
     println("Lines with april: %s, Lines with 2020: %s".format(april, ano2020))
+    println("************")
+    println("************")
   }
 }
